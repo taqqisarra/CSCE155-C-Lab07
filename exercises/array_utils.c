@@ -31,7 +31,7 @@ int * generateRandomArray(int size) {
   if(size < 0) {
     return NULL;
   }
-  int randomArr[size];
+  int* randomArr = (int*) malloc(4*size);
   for(int i=0; i<size; i++) {
     randomArr[i] = rand() % 100;
   }
@@ -45,7 +45,7 @@ int getSum(int *arr, int size) {
   int total = 0;
   for(int i=0; i<size; i++) {
     total += arr[i];
-    arr[i] = 0;
+    
   }
   return total;
 }
@@ -60,28 +60,166 @@ void freeTable(int **table, int n) {
   free(table);
 }
 
+// defination of  getMean(); function;
+
 double getMean(const int *arr, int size) {
-  //TODO: implement
+
+double avg;
+
+int sum=0;
+
+  for(int i=0;i<size;i++){
+
+sum=sum+ *arr;
+arr++;
+
+  }
+
+avg = sum/size;
+
+  return avg;
+
 }
+
+//defination of getmin(); function
 
 int getMin(const int *arr, int size) {
-  //TODO: implement
+  
+int min=arr[0];
+
+for(int i=1;i<size;i++){
+
+if(arr[i]<min){
+
+min=arr[i];
+
+  
 }
+
+}
+
+return min;
+
+}
+
+//defination of getindexofMin(); function
 
 int getIndexOfMin(const int *arr, int size) {
-  //TODO: implement
+
+int min=arr[0];
+
+for(int i=1;i<size;i++){
+
+if(arr[i]<min){
+
+min=arr[i];
+ 
 }
+
+}
+
+for(int i=0;i<size;i++){
+
+if(min==arr[i]){
+
+return i;
+
+}
+
+
+}
+ 
+}
+
+//defination of getMax(); function
+
 
 int getMax(const int *arr, int size) {
-  //TODO: implement
+
+int max=arr[0];
+
+for(int i=1;i<size;i++){
+
+if (max<arr[i]){
+
+max=arr[i];
+  
 }
+
+}
+
+return max;
+
+}
+
+//defination of getindexofMax(); function
+
 
 int getIndexOfMax(const int *arr, int size) {
-  //TODO: implement
+
+ int max=arr[0];
+
+for(int i=1;i<size;i++){
+
+if (max<arr[i]){
+
+max=arr[i];
+  
+}
 }
 
+for(int i=0;i<size;i++){
+
+if(max==arr[i]){
+
+return i;
+
+}
+
+} 
+
+}
+
+
+//defination of fiterThreshold(); function
+
 int * filterThreshold(const int *arr, int size, int threshold, int *resultSize) {
-  //TODO: implement
+
+int count=0;
+
+for(int i=0;i<size;i++){
+
+if(arr[i] >= threshold){
+
+count++;
+
+}
+}
+int *dyn_arr = (int*) malloc(4*count); 
+
+*resultSize = count;
+
+int index=0;
+
+if(dyn_arr==NULL){
+
+  printf("\nMemory Allocation Error\n");
+  exit(1);
+
+}
+
+for (int i = 0; i < size; i++)
+{
+  if(arr[i] >= threshold) {
+
+dyn_arr[index]=arr[i];
+
+index++;
+
+  }
+
+}
+return dyn_arr;  
 }
 
 int **createMultiplicationTable(int n, int m) {
